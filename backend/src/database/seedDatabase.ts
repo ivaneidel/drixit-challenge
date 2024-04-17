@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 import { connect, connection, disconnect } from "mongoose";
 import seedUsers from "./seedUsers.json";
 import { User } from "./schema";
+import { generateRandomString } from "../utils/utils";
 
 dotenv.config();
 
@@ -25,7 +26,7 @@ async function executeSeed() {
     reuse in case of leakage.
     */
     const newSalt = await bcrypt.genSalt(10);
-    const newJWTSecret = await bcrypt.genSalt(10);
+    const newJWTSecret = generateRandomString(20);
 
     // Store the salt in the environment to use in the pre save hook in the next step
     process.env.HASH_SALT = newSalt;
