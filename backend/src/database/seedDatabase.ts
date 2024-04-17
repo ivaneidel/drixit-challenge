@@ -19,9 +19,15 @@ async function executeSeed() {
     // Drop the database to make sure there's no documents left over from previous iterations
     await connection.dropDatabase();
 
-    // Create a new Salt to hash passwords every time we seed the database
-    // as a security measure to avoid salt reuse in case of leakage
+    /*
+    Create a new Salt to hash passwords and JWT secret to sign tokens
+    every time we seed the database as a security measure to avoid
+    reuse in case of leakage.
+    */
     const newSalt = await bcrypt.genSalt(10);
+    const newJWTSecret = await bcrypt.genSalt(10);
+
+    // Store the salt in the environment to use in the pre save hook in the next step
     process.env.HASH_SALT = newSalt;
 
     for (const user of seedUsers) {
@@ -32,10 +38,11 @@ async function executeSeed() {
     }
 
     console.log(`
-Save the new SALT in the .env file under the key 'HASH_SALT'
------------------------------
-${newSalt}
------------------------------
+Save the new Salt and JWT Secret in the .env file under the keys 'HASH_SALT' and 'JWT_SECRET' respectively
+----------------------------------------
+HASH_SALT=${newSalt}
+JWT_SECRET=${newJWTSecret}
+----------------------------------------
 `);
 
     await disconnect();
