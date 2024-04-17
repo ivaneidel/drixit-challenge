@@ -32,9 +32,11 @@ const userSchema = new Schema<ServerUser>({
 });
 
 userSchema.pre("save", async function (next) {
-  const salt = process.env.HASH_SALT;
-  const hash = bcrypt.hash(this.password, salt);
-  this.password = hash;
+  if (this.isModified("password")) {
+    const salt = process.env.HASH_SALT;
+    const hash = await bcrypt.hash(this.password, salt);
+    this.password = hash;
+  }
   next();
 });
 
