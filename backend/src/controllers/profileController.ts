@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { User } from "../database/schema";
 
 const profileController = async (req: Request, res: Response) => {
-  // @ts-ignore // Ignore as auth is not a valid Request property
+  // @ts-ignore // Ignore as auth is not a valid Request property but it's added by the express-jwt middleware
   const id = req.auth.id;
 
   const user = await User.findById(id).select("-password").lean();
