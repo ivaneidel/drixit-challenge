@@ -4,6 +4,7 @@
 */
 
 import { Schema, model } from "mongoose";
+const bcrypt = require("bcrypt");
 
 interface ClientUser {
   id: string;
@@ -24,9 +25,17 @@ const userSchema = new Schema<ServerUser>({
   avatar: String,
   age: Number,
   email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
   name: { type: String, required: true },
   role: { type: String, default: "user", required: true },
   surname: { type: String, required: true },
+});
+
+userSchema.pre("save", async function (next) {
+  const salt = process.env.HASH_SALT;
+  const hash = bcrypt.hash(this.password, salt);
+  this.password = hash;
+  next();
 });
 
 const User = model<ServerUser>("User", userSchema);
