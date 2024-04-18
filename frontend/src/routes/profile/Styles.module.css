@@ -1,0 +1,50 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paper {
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.profileContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.profile {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    margin-right: 30px;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  span {
+    margin-bottom: 10px;
+  }
+}
+
+.logoutButton {
+  align-self: flex-end;
+}

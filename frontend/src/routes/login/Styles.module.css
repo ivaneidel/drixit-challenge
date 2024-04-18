@@ -1,0 +1,26 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paper {
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  max-width: 425px;
+
+  h2 {
+    text-align: center;
+  }
+
+  button {
+    align-self: flex-end;
+    margin-top: 20px;
+  }
+}
