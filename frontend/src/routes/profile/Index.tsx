@@ -36,9 +36,7 @@ function ProfilePage() {
 
     const profile = await getProfile(token);
 
-    console.log(profile);
-
-    // // If there's no token stored locally, redirect to login
+    // If there's no token stored locally, redirect to login
     if (!profile) {
       setRedirectToLogin(true);
       setLoading(false);
