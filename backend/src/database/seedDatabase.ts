@@ -47,9 +47,13 @@ JWT_SECRET=${newJWTSecret}
 `);
 
     await disconnect();
+    
+    console.log("Seeding process finished");
+  }
+  else{
+    console.error('DB_URI was not found. Define it in you .env file')
   }
 
-  console.log("Seeding process finished");
 }
 
 executeSeed();
